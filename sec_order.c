@@ -16,7 +16,7 @@ float first_derv(float t,float r, float z1, float z2){
 }
 
 //Segunda derivada (para cualquier ordenada (x,y)) 
-float second_derv(float t,float r, float x1, float x2){
+float second_derv(float t,float r, float z1, float z2){
 
   return (G*M*(z1))/(pow(r,3));
 
@@ -29,6 +29,7 @@ float runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_o
 
   float x1_prime_1, x2_prime_1, y1_prime_1, y2_prime_1, t_mid, x1_mid, x2_mid, y1_mid, y2_mid;
   float x1_prime_2, x2_prime_2, y1_prime_2, y2_prime_2, t_mid1, x1_mid1, x2_mid1, y1_mid1, y2_mid1;
+  float x1_prime_3, x2_prime_3, y1_prime_3, y2_prime_3, t_mid2, x1_mid2, x2_mid2, y1_mid2, y2_mid2;
   float x1_prime_4, x2_prime_4, y1_prime_4, y2_prime_4;
   float x1_prime_av, x2_prime_av, y1_prime_av, y2_prime_av;
   
