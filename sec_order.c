@@ -24,6 +24,13 @@ float second_derv(float t,float r, float x1, float x2){
 
 //Aproximación: Método Runge Kutta de 4to orden (para cualquier ordenada (x,y))
 float runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
+
+  //variable declaration
+
+  float x1_prime_1, x2_prime_1, y1_prime_1, y2_prime_1, t_mid, x1_mid, x2_mid, y1_mid, y2_mid;
+  float x1_prime_2, x2_prime_2, y1_prime_2, y2_prime_2, t_mid1, x1_mid1, x2_mid1, y1_mid1, y2_mid1;
+  float x1_prime_4, x2_prime_4, y1_prime_4, y2_prime_4;
+  float x1_prime_av, x2_prime_av, y1_prime_av, y2_prime_av;
   
   //get the first derivatives of x and y
 
