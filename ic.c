@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#define G 4.6*(pow(10,(-6)) //Valor de la constante de gravitación universal en kpc*km^2*s^-2*Mo^-1
+#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Byr^-2*Mo^-1, donde Byr son billones de años
 #define PI 3.14159
 
-"""
+/*
 El programa calcula las condiciones iniciales para 120 estrellas en una galaxia con 5 órbitas.
 Autores: Nathalie Agudelo Dueñas y  María M. Ariza Acero 
 Fecha de creación: Oct/17/2013
-"""
+*/
 
 float main(int argc, char **argv){
 
@@ -73,17 +73,17 @@ float main(int argc, char **argv){
     if(i < 13){
    
       v_t = sqrt(G*M/r);
-      vix[i] = v_t*sin(i*theta1) + v0x_c;
+      vix[i] = -v_t*sin(i*theta1) + v0x_c;
       viy[i] = v_t*cos(i*theta1) + v0y_c;
-      xi[i] = r*cos(n*theta1) + x0_c;
-      yi[i] = r*sin(n*theta1) + y0_c;
+      xi[i] = r*cos(i*theta1) + x0_c;
+      yi[i] = r*sin(i*theta1) + y0_c;
       
     }
 
     if(13 <= i && i < 31){
       
       v_t = sqrt((G*M)/(2*r));
-      vix[i] = v_t*sin((i-12)*theta2) + v0x_c;
+      vix[i] = -v_t*sin((i-12)*theta2) + v0x_c;
       viy[i] = v_t*cos((i-12)*theta2) + v0y_c;
       xi[i] = r*cos((i-12)*theta2) + x0_c;
       yi[i] = r*sin((i-12)*theta2) + y0_c;
@@ -93,7 +93,7 @@ float main(int argc, char **argv){
     if(31 <= i && i < 55){
       
       v_t = sqrt((G*M)/(3*r));
-      vix[i] = v_t*sin((i-30)*theta3) + v0x_c;
+      vix[i] = -v_t*sin((i-30)*theta3) + v0x_c;
       viy[i] = v_t*cos((i-30)*theta3) + v0y_c;
       xi[i] = r*cos((i-30)*theta3) + x0_c;
       yi[i] = r*sin((i-30)*theta3) + y0_c;
@@ -103,7 +103,7 @@ float main(int argc, char **argv){
     if(55 <= i && i < 85){
       
       v_t = sqrt((G*M)/(4*r));
-      vix[i] = v_t*sin((i-54)*theta4) + v0x_c;
+      vix[i] = -v_t*sin((i-54)*theta4) + v0x_c;
       viy[i] = v_t*cos((i-54)*theta4) + v0y_c;
       xi[i] = r*cos((i-54)*theta4) + x0_c;
       yi[i] = r*sin((i-54)*theta4) + y0_c;
@@ -113,7 +113,7 @@ float main(int argc, char **argv){
     if(85 <= i && i < 121){
       
       v_t = sqrt((G*M)/(5*r));
-      vix[i] = v_t*sin((i-84)*theta5) + v0x_c;
+      vix[i] = -v_t*sin((i-84)*theta5) + v0x_c;
       viy[i] = v_t*cos((i-84)*theta5) + v0y_c;
       xi[i] = r*cos((i-84)*theta5) + x0_c;
       yi[i] = r*sin((i-84)*theta5) + y0_c;
