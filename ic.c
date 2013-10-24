@@ -18,7 +18,7 @@ float main(int argc, char **argv){
   float y0_c = atof(argv[2]);
   float v0x_c = atof(argv[3]);
   float v0y_c = atof(argv[4]);
-  int M = pow(10,12);
+  float M = pow(10,12);
   int R = 50;
   int r = 10;
   int v_t = 0;
@@ -49,54 +49,80 @@ float main(int argc, char **argv){
   
   //Llenando los id 
   
-  for(i=0;i<121;i++){
+  for(i = 0; i < 121; i++){
 
     id[i] = i-1;
 
   }
   
-  //Calculando las velocidades en x
-  
+  //Calculando las condiciones iniciales
+
+  xi[0] = x0_c;
+  yi[0] = y0_c;
   vix[0] = v0x_c;
+  viy[0] = v0y_c;
   
-  for(i=1;i<121;i++){
+  for(i = 1; i < 121; i++){
     
     if(i < 13){
-      
-      v_t = pow(((G*M)/r),0.5);
-      vix[i] = v_t*sin(n*theta1) + v0x_c;
-      viy[i] = v_t*cos(n*theta1) + v0y_c;
-      xi = r*cos(n*theta1) + x0_c;
-      yi = r*sin(n*theta1) + y0_c;
+   
+      v_t = pow(((G*M)/r), 0.5);
+      vix[i] = v_t*sin(i*theta1) + v0x_c;
+      viy[i] = v_t*cos(i*theta1) + v0y_c;
+      xi[i] = r*cos(n*theta1) + x0_c;
+      yi[i] = r*sin(n*theta1) + y0_c;
 
     }
 
     if(13 <= i && i < 31){
       
-      v_t = (G*M)/2r;
+      v_t = pow(((G*M)/(2*r)), 0.5);
+      vix[i] = v_t*sin((i-12)*theta2) + v0x_c;
+      viy[i] = v_t*cos((i-12)*theta2) + v0y_c;
+      xi[i] = r*cos((i-12)*theta2) + x0_c;
+      yi[i] = r*sin((i-12)*theta2) + y0_c;
 
     }
 
     if(31 <= i && i < 55){
       
-      v_t = (G*M)/3r;
+      v_t = pow(((G*M)/(3*r)), 0.5);
+      vix[i] = v_t*sin((i-30)*theta3) + v0x_c;
+      viy[i] = v_t*cos((i-30)*theta3) + v0y_c;
+      xi[i] = r*cos((i-30)*theta3) + x0_c;
+      yi[i] = r*sin((i-30)*theta3) + y0_c;
 
     }
 
     if(55 <= i && i < 85){
       
-      v_t = (G*M)/4r;
+      v_t = pow(((G*M)/(4*r)), 0.5);
+      vix[i] = v_t*sin((i-54)*theta4) + v0x_c;
+      viy[i] = v_t*cos((i-54)*theta4) + v0y_c;
+      xi[i] = r*cos((i-54)*theta4) + x0_c;
+      yi[i] = r*sin((i-54)*theta4) + y0_c;
 
     }
 
     if(85 <= i && i < 121){
       
-      v_t = (G*M)/5r;
+      v_t = pow(((G*M)/(5*r)), 0.5);
+      vix[i] = v_t*sin((i-84)*theta5) + v0x_c;
+      viy[i] = v_t*cos((i-84)*theta5) + v0y_c;
+      xi[i] = r*cos((i-84)*theta5) + x0_c;
+      yi[i] = r*sin((i-84)*theta5) + y0_c;
 
     }
 
   } 
 
+  FILE *output;
   output = fopen("condiciones_iniciales.txt","w");
-
+  
+  for(i=0;i<121;i++){
+    fprintf(output, "%f %f %f %f\n", id[i], xi[i], yi[i], vix[i], viy[i]);
+  }
+  
+  fclose(output);
+  
 }  
