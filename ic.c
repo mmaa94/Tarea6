@@ -8,10 +8,10 @@ float main(int argc, char **argv){
 
   if(argc != 5){
 
-    printf("El número de parámetros de entrada no es el requerido");
+    printf("El número de parámetros requerido es 4");
     exit(1);
   }
-
+  
   //Condiciones iniciales para el centro de la galaxia y las constantes a usar en los cálculos
 
   float x0_c = atof(argv[1]);
@@ -22,9 +22,9 @@ float main(int argc, char **argv){
   int R = 50;
   int r = 10;
   int v_t = 0;
-
+  
   //Espacio entre estrellas para cada orbita (en grados)
-
+  
   int theta1 = PI/6;
   int theta2 = PI/9;
   int theta3 = PI/12;
@@ -66,17 +66,17 @@ float main(int argc, char **argv){
     
     if(i < 13){
    
-      v_t = pow(((G*M)/r), 0.5);
+      v_t = sqrt(G*M/r);
       vix[i] = v_t*sin(i*theta1) + v0x_c;
       viy[i] = v_t*cos(i*theta1) + v0y_c;
       xi[i] = r*cos(n*theta1) + x0_c;
       yi[i] = r*sin(n*theta1) + y0_c;
-
+      
     }
 
     if(13 <= i && i < 31){
       
-      v_t = pow(((G*M)/(2*r)), 0.5);
+      v_t = sqrt((G*M)/(2*r));
       vix[i] = v_t*sin((i-12)*theta2) + v0x_c;
       viy[i] = v_t*cos((i-12)*theta2) + v0y_c;
       xi[i] = r*cos((i-12)*theta2) + x0_c;
@@ -86,7 +86,7 @@ float main(int argc, char **argv){
 
     if(31 <= i && i < 55){
       
-      v_t = pow(((G*M)/(3*r)), 0.5);
+      v_t = sqrt((G*M)/(3*r));
       vix[i] = v_t*sin((i-30)*theta3) + v0x_c;
       viy[i] = v_t*cos((i-30)*theta3) + v0y_c;
       xi[i] = r*cos((i-30)*theta3) + x0_c;
@@ -96,7 +96,7 @@ float main(int argc, char **argv){
 
     if(55 <= i && i < 85){
       
-      v_t = pow(((G*M)/(4*r)), 0.5);
+      v_t = sqrt((G*M)/(4*r));
       vix[i] = v_t*sin((i-54)*theta4) + v0x_c;
       viy[i] = v_t*cos((i-54)*theta4) + v0y_c;
       xi[i] = r*cos((i-54)*theta4) + x0_c;
@@ -106,7 +106,7 @@ float main(int argc, char **argv){
 
     if(85 <= i && i < 121){
       
-      v_t = pow(((G*M)/(5*r)), 0.5);
+      v_t = sqrt((G*M)/(5*r));
       vix[i] = v_t*sin((i-84)*theta5) + v0x_c;
       viy[i] = v_t*cos((i-84)*theta5) + v0y_c;
       xi[i] = r*cos((i-84)*theta5) + x0_c;
@@ -125,4 +125,5 @@ float main(int argc, char **argv){
   
   fclose(output);
   
-}  
+}
+
