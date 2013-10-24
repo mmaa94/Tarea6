@@ -2,9 +2,15 @@
 #include <math.h>
 #include <stdlib.h>
 
+/*
+Módulo que contiene las funciones para desarrollar el Runge Kutta de cuarto orden.
+Autores: Nathalie Aguedelo Dueñas y María M. Ariza Acero
+Fecha de creación: Oct 22  21:43:35 COT 2013
+*/
+
 //Constante de gravitación universal en kpc*km²
 
-#define G 4.3*(pow(10,-6))
+#define G 4.80475E-6 
 
 //Masa del CM de la galaxia
 #define M pow(10,12)
@@ -23,7 +29,7 @@ float second_derv(float t,float r, float z1, float z2){
 }
 
 //Aproximación: Método Runge Kutta de 4to orden (para cualquier ordenada (x,y))
-float runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
+float *main( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
 
   //variable declaration
 
@@ -103,9 +109,20 @@ float runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_o
   y2_prime_av=(1/6)*(y1_prime_1+(2*y1_prime_2)+(2*y1_prime_3)+y1_prime_4);
   y2_prime_av=(1/6)*(y2_prime_1+(2*y2_prime_2)+(2*y2_prime_3)+y2_prime_4);
 
-  //return values
+  //array of values to return 
  
-  return t_mid2, x1_prime_av,x2_prime_av,y1_prime_av, y2_prime_av;
+  float *ans;
+  ans=malloc(5*sizeof(float));
+  
+  ans[0]=t_mid2;
+  ans[1]=x1_prime_av;
+  ans[2]=x2_prime_av;
+  ans[3]=y1_prime_av; 
+  ans[4]=y2_prime_av;
+
+  //fill the array of values to return
+
+  return ans;
 }
 
 
