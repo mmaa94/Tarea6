@@ -4,6 +4,12 @@
 #define G 4.6*(pow(10,(-6)) //Valor de la constante de gravitación universal en kpc*km^2*s^-2*Mo^-1
 #define PI 3.14159
 
+"""
+El programa calcula las condiciones iniciales para 120 estrellas en una galaxia con 5 órbitas.
+Autores: Nathalie Agudelo Dueñas y  María M. Ariza Acero 
+Fecha de creación: Oct/17/2013
+"""
+
 float main(int argc, char **argv){
 
   if(argc != 5){
