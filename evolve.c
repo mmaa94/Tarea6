@@ -1,66 +1,174 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include "count_lines.h"
+#include "sec_order.h"
 
-//Constante de gravitación universal en kpc*km²
+"""
+Módulo que contiene la función main para analizar los datos de un archivo de puntos y hacer lasolución usando Runge Kutta de cuarto orden.
+Autores:Nathalie Agudelo Dueñas y  María M. Ariza Acero 
+Fecha de creación: Oct  24 02:53:49 COT 2013
+"""
 
-#define G 4.3*(pow(10,-6))
+float main(int argc, char **dots){
 
-//
-float first_derv(float x, float y1, float y2){
+  //Comprobar el número de parámetros
 
-  return y2;
-}
+  if(argc!=2){
+	      printf("Los parámetros de entrada no son los requeridos");
+	      exit(1);
+	    }
 
-float second_derv(float x, float y1, float y2){
+  //Archivo 
+  FILE *dot;
+  dot=fopen(dots[1],"r");
 
-  return ;
+  if(!(dot=fopen(argv[1],"r"))){
+	      printf("Problema abriendoel archivo %s\n",argv[1]);
+	      exit(1);
+	    }
 
-}
-
-
-float runge_kutta4( float x_old, float y1_old,float  y2_old, float h){
+  //Número de objetos a analizar
+  int n_points=count_lines(dot);
   
-  //get the first derivatives
+  //Número de galaxias
+  int n_galaxias=n_points/121;
 
-  y1_prime_1 = first_derv(x_old,y1_old, y2_old);
-  y2_prime_1 = second_derv(x_old,y1_old, y2_old);
+  //Arreglos que guardan las coordenadas los ID, posiciones y velocidades inciales en el archivo de entrada
+  float *id, *x0, *y0, *v0x, *v0y;
 
-  //from this estimation move to the middle point
-  x_mid = x_old+ (h/2.0);
-  y1_mid = y1_old + (h/2.0) * y1_prime_1;
-  y2_mid = y2_old + (h/2.0) * y2_prime_1; 
+  //Separación de espacio para guardar los datos de las condiciones inciales  
+  id=malloc(n_points*sizeof(float));
+  x0=malloc(n_points*sizeof(float));
+  y0=malloc(n_points*sizeof(float));
+  v0x=malloc(n_points*sizeof(float));
+  v0y=malloc(n_points*sizeof(float));
 
-  //from this new points calculate primes
+  //Entero para recorrer un ciclo
+  int i;
 
-  y1_prime_2 = first_derv(x_mid,y1_mid, y2_mid);
-  y2_prime_2 = second_derv(x_mid,y1_mid, y2_mid);
+  //Arreglo para el tiempo
 
-  //from this estimation move to the middle point
+  float *t;
+  t=malloc(50*sizeof(float));
 
-  x_mid1 = x_mid+ (h/2.0);
-  y1_mid1 = y1_mid + (h/2.0) * y1_prime_2;
-  y2_mid1 = y2_mid + (h/2.0) * y2_prime_2;
+  //Ciclo para llenar el arreglo del tiempo
 
-  //from this new points calculate primes 
+  for(i=0; i<121; i++){
+    
+    t[i]=i;
+  }
 
-  y1_prime_3 = first_derv(x_mid1,y1_mid1, y2_mid1);
-  y2_prime_3 = second_derv(x_mid1,y1_mid1, y2_mid1);
+  //Ciclo para guardar los datos en los arregloa anteriores
 
-  //from this estimation move to the next point
+  for(i=0;i<n_points;i++){
 
-  x_mid2 = x_mid1+ h;
-  y1_mid2 = y1_mid1 + h * y1_prime_3;
-  y2_mid2 = y2_mid1 + h * y2_prime_3; 
+    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],,&v0x[i],&v0y[i]);
+  }
+  fclose(dot);
 
-  //last prime estimation 
+  //Ciclo para hacer el análisis conel modelode Runge Kutta en cada galaxia y para cada estrella
+  for(i=0;i<n_galaxias;i++){
 
-  y1_prime_4 = first_derv(x_mid2,y1_mid2, y2_mid2);
-  y2_prime_4 = second_derv(x_mid2,y1_mid2, y2_mid2);
+    //Entero para recorrer un ciclo
+    int j;
 
-  //averages 
+    for(j=1;j=121;j++){
+
+      float rg_4od[5];
+      rg_4od=runge_kutta4(1,2,3,4,5];
+    }
+  }    
   
-  y1_prime_av=(1/6)*(y1_prime_1+(2*y1_prime_2)+(2*y1_prime_3)+y1_prime_4);
-  y2_prime_av=(1/6)*(y2_prime_1+(2*y2_prime_2)+(2*y2_prime_3)+y2_prime_4);
+  //Escritura del primer archivo
 
-}
+    FILE *in1;
+    char filename1[25]="t1_output.dat";
+
+    in1 = fopen(filename1,"w");
+
+    if(!in1){
+    printf("problems opening the file %s\n",filename1);
+    exit(1);
+    }
+
+    for(i=0;i<n_points;i++){
+      fprintf(in1, "%d\n", i);
+    }
+    
+    fclose(in1);
+
+  //Escritura del segundo archivo
+    
+    FILE *in2;
+    char filename2[25]="t2_output.dat";
+
+    in2 = fopen(filename2,"w");
+
+    if(!in2){
+    printf("problems opening the file %s\n", filename2);
+    exit(1);
+    }
+
+    for(i=0;i<n_points;i++){
+      fprintf(in2, "%d\n", i);
+    }
+    
+    fclose(in2);
+
+  //Escritura del tercer archivo
+
+    FILE *in3;
+    char filename3[25]="t3_output.dat";
+
+    in3 = fopen(filename3,"w");
+
+    if(!in3){
+    printf("problems opening the file %s\n", filename3);
+    exit(1);
+    }
+
+    for(i=0;i<n_points;i++){
+      fprintf(in3, "%d\n", i);
+    }
+    
+    fclose(in3);
+
+  //Escritura del cuarto  archivo
+
+    FILE *in4;
+    char filename4[25]="t4_output.dat";
+
+    in4 = fopen(filename4,"w");
+
+    if(!in4){
+    printf("problems opening the file %s\n", filename4);
+    exit(1);
+    }
+
+    for(i=0;i<n_points;i++){
+      fprintf(in4, "%d\n", i);
+    }
+    
+    fclose(in4);
+
+  //Escritura del quinto archivo
+
+    FILE *in5;
+    char filename5[25]="t5_output.dat";
+    
+    in5 = fopen(t5_output,"w");
+
+    if(!in5){
+    printf("problems opening the file %s\n", filename5);
+    exit(1);
+    }
+
+    for(i=0;i<n_points;i++){
+      fprintf(in5, "%d\n", i);
+    }
+    
+    fclose(in5);
+
+  return 0;
+}  
