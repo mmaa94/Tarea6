@@ -4,11 +4,11 @@
 #include "count_lines.h"
 #include "sec_order.h"
 
-"""
+/**
 Módulo que contiene la función main para analizar los datos de un archivo de puntos y hacer lasolución usando Runge Kutta de cuarto orden.
 Autores:Nathalie Agudelo Dueñas y  María M. Ariza Acero 
 Fecha de creación: Oct  24 02:53:49 COT 2013
-"""
+**/
 
 float main(int argc, char **dots){
 

@@ -2,11 +2,11 @@
 #include <math.h>
 #include <stdlib.h>
 
-/*
+/**
 Módulo que contiene las funciones para desarrollar el Runge Kutta de cuarto orden.
 Autores: Nathalie Aguedelo Dueñas y María M. Ariza Acero
 Fecha de creación: Oct 22  21:43:35 COT 2013
-*/
+**/
 
 //Constante de gravitación universal en kpc*km²
 

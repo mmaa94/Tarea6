@@ -2,7 +2,13 @@
 #include <math.h>
 #include <stdlib.h>
 
-int contarlineas(char *filename){
+/**
+Módulo que contiene la función para calcular el número de líneas en un archivo.
+Autores:Nathalie Agudelo Dueñas y  María M. Ariza Acero 
+Fecha de creación: Oct  24 03:14:34 COT 2013
+**/
+
+int count_lines(char *filename){
 
 	FILE *in;
 	int n_lineas;
