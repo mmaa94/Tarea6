@@ -44,10 +44,6 @@ float main(int argc, char **dots){
   v0x=malloc(n_stars*sizeof(float));
   v0y=malloc(n_stars*sizeof(float));
 
-  //Entero para recorrer un ciclo
-
-  int i;
-
   //Ciclo para guardar los datos en los arreglos anteriores
 
   for(i=0;i<n_points;i++){
@@ -64,35 +60,109 @@ float main(int argc, char **dots){
   float time=5*pow(10,9);
   int n_points=int((time+h)/h);
 
-  //Arreglo para el tiempo
-
-  float *t;
-  t=malloc(n_points*sizeof(float));
-
-  //Arreglos para de los resultados obtenidos para X, Y, Vx, Vy para t
+  //Arreglos para de los resultados obtenidos para X, Y, Vx, Vy para los tiempos t=1E9, 2E9, 3E9,4E9, 5E9
 
   float *t_X;
   float *t_y;
   float *t_Vx;
   float *t_Vy;
 
-  t_X=malloc(n_stars*sizeof(float));
-  t_y=malloc(n_stars*sizeof(float));
-  t_Vx=malloc(n_stars*sizeof(float));
-  t_Vy=malloc(n_stars*sizeof(float));
+  t_X=malloc(5*n_stars*sizeof(float));
+  t_y=malloc(5*n_stars*sizeof(float));
+  t_Vx=malloc(5*n_stars*sizeof(float));
+  t_Vy=malloc(5*n_stars*sizeof(float));
 
-  //Ciclo para hacer el análisis conel modelode Runge Kutta en cada galaxia y para cada estrella
-  for(i=0;i<n_galaxias;i++){
+  //Entero para recorrer un ciclo
 
-    //Entero para recorrer un ciclo
-    int j;
+  int i;
 
-    for(j=1;j=121;j++){
+  //Análisis para cada estrella de una sóla galaxia 
 
-      float rg_4od[5];
-      rg_4od=runge_kutta4(1,2,3,4,5);
+  if(n_galaxias==1){
+    
+    //Ciclo para recorrer cada estrella
+
+    for(i=0;i<120;i++){
+
+      //Distancia de la órbita de la estrella al CM en kpc
+      float r;
+      
+      //Órbita interna
+      if(i<=11){
+	r=10;
+      }
+      //Segunda órbita
+      if(i>=12 && i<=29){
+	r=20;
+      }
+      //Tercera órbita
+      if(i>=30 && i<=53){
+	r=30;
+      }
+      //Cuarta órbita
+      if(i>=54 && i<=83){
+	r=40;
+      }
+      //Órbita exterior
+      if(i>=84 && i<=119){
+	r=50;
+      }
+
+      //Arreglos para guardar las posiciones y velocidades de la i-ésima estrella durante los 5000' de años
+
+      float *Xi;
+      Xi=malloc(n_points*sizeof(float));
+
+      float *Yi;
+      Vxi=malloc(n_points*sizeof(float));
+
+      float *Vxi;
+      Vxi=malloc(n_points*sizeof(float));
+
+      float *Vyi;
+      Vyi=malloc(n_points*sizeof(float));
+
+      //Arreglo para el tiempo
+      float *ti;
+      t=malloc(n_points*sizeof(float));
+
+      //Condiciones iniciales 
+
+      t[0]=0;
+      Xi[0]=x0[i];
+      Yi[0]=y0[i];
+      Vxi[0]=v0x[i];
+      Vyi[0]=v0y[i];
+
+      //Ciclo para terminar de llenar los arreglos anteriores, resultado de aplicar el método de Runge Kutta de 4to orden
+
+      int j;
+
+      for(j=1;j=n_points;j++){
+
+	float *rg_4j=main(t[j-1],r,Xi[j-1],Vxi[j-1],Yi[j-1],Vyi[j-1],h);//Main del módulo Runge Kutta 4to orden(sec_order.c)
+	rg_4j[0]=t[j];
+	rg_4j[1]=Xi[j];
+	rg_4j[2]=Vxi[j];
+	rg_4j[3]=Yi[j];
+	rg_4j[4]=Vyi[j];
+
+	/**
+	if (rg_4j[0]==(1*pow(10,9))){
+
+	  int k;
+	  for(k=0;k<(5*n_stars);
+	}
+	**/
+      }
+
+      free(*t);
+      free(*Xi);
+      free(*Yi);
+      free(*Vxi);
+      free(*Vxi);
     }
-  }    
+  } 
   
   //Escritura del primer archivo
 
@@ -191,7 +261,6 @@ float main(int argc, char **dots){
     free(*y0);
     free(*v0x);
     free(*v0y);
-    free(*t);
 
   return 0;
 }  
