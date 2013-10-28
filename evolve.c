@@ -29,20 +29,20 @@ float main(int argc, char **dots){
 	    }
 
   //Número de objetos a analizar
-  int n_points=count_lines(dot);
+  int n_stars=count_lines(dot);
   
   //Número de galaxias
-  int n_galaxias=n_points/121;
+  int n_galaxias=n_stars/121;
 
   //Arreglos que guardan las coordenadas los ID, posiciones y velocidades inciales en el archivo de entrada
   float *id, *x0, *y0, *v0x, *v0y;
 
   //Separación de espacio para guardar los datos de las condiciones inciales  
-  id=malloc(n_points*sizeof(float));
-  x0=malloc(n_points*sizeof(float));
-  y0=malloc(n_points*sizeof(float));
-  v0x=malloc(n_points*sizeof(float));
-  v0y=malloc(n_points*sizeof(float));
+  id=malloc(n_stars*sizeof(float));
+  x0=malloc(n_stars*sizeof(float));
+  y0=malloc(n_stars*sizeof(float));
+  v0x=malloc(n_stars*sizeof(float));
+  v0y=malloc(n_stars*sizeof(float));
 
   //Entero para recorrer un ciclo
   int i;
@@ -76,7 +76,7 @@ float main(int argc, char **dots){
     for(j=1;j=121;j++){
 
       float rg_4od[5];
-      rg_4od=runge_kutta4(1,2,3,4,5];
+      rg_4od=runge_kutta4(1,2,3,4,5);
     }
   }    
   
