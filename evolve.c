@@ -45,9 +45,18 @@ float main(int argc, char **dots){
   v0y=malloc(n_stars*sizeof(float));
 
   //Entero para recorrer un ciclo
+
   int i;
 
-  //Intervalo entre cada punto de tiempo
+  //Ciclo para guardar los datos en los arreglos anteriores
+
+  for(i=0;i<n_points;i++){
+
+    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],,&v0x[i],&v0y[i]);
+  }
+  fclose(dot);
+
+   //Intervalo entre cada punto de tiempo
   float h=5000;
   
   //Número de puntos de tiempo
@@ -55,26 +64,22 @@ float main(int argc, char **dots){
   float time=5*pow(10,9);
   int n_points=int((time+h)/h);
 
-
   //Arreglo para el tiempo
 
   float *t;
-  t=malloc(50*sizeof(float));
+  t=malloc(n_points*sizeof(float));
 
-  //Ciclo para llenar el arreglo del tiempo
+  //Arreglos para de los resultados obtenidos para X, Y, Vx, Vy para t
 
-  for(i=0; i<121; i++){
-    
-    t[i]=i;
-  }
+  float *t_X;
+  float *t_y;
+  float *t_Vx;
+  float *t_Vy;
 
-  //Ciclo para guardar los datos en los arregloa anteriores
-
-  for(i=0;i<n_points;i++){
-
-    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],,&v0x[i],&v0y[i]);
-  }
-  fclose(dot);
+  t_X=malloc(n_stars*sizeof(float));
+  t_y=malloc(n_stars*sizeof(float));
+  t_Vx=malloc(n_stars*sizeof(float));
+  t_Vy=malloc(n_stars*sizeof(float));
 
   //Ciclo para hacer el análisis conel modelode Runge Kutta en cada galaxia y para cada estrella
   for(i=0;i<n_galaxias;i++){
@@ -178,6 +183,15 @@ float main(int argc, char **dots){
     }
     
     fclose(in5);
+
+  //Liberar espacio
+
+    free(*id);
+    free(*x0);
+    free(*y0);
+    free(*v0x);
+    free(*v0y);
+    free(*t);
 
   return 0;
 }  
