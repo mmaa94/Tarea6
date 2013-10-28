@@ -18,18 +18,37 @@ Fecha de creación: Oct 22  21:43:35 COT 2013
 //Primera derivada (para cualquier ordenada (x,y))
 float first_derv(float t,float r, float z1, float z2){
 
+  /**
+   Retorna la primera derivada de la coordenada que entra 
+  **/
   return z2;
 }
 
 //Segunda derivada (para cualquier ordenada (x,y)) 
 float second_derv(float t,float r, float z1, float z2){
 
+   /**
+   Retorna la segunda derivada de la coordenada que entra 
+  **/
   return (G*M*(z1))/(pow(r,3));
 
 }
 
-//Aproximación: Método Runge Kutta de 4to orden (para cualquier ordenada (x,y))
+//Aproximación: Método Runge Kutta de 4to orden para cada coordenada
 float *main( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
+
+  /**
+   Calcula el valor de la derivada en el punto usando la aproximación del método de Runge Kutta de 4to orden.
+   Input: 
+   -t_old: valor previo del tiempo
+   -r: valor de la distancia entre la estrella y el centro de masa
+   -x1_old: valor previo de x
+   -x2_old: valor previo de la primera derivada de x
+   -y1_old: valor previo de y
+   -y2_old: valor previo de la primera derivada de y
+   -h: espacio en tre cada tiempo
+   Output:Arreglo con los nuevos valores de tiempo, las coordenadas x y y y sus respectivas derivadas
+  **/
 
   //variable declaration
 
@@ -109,18 +128,27 @@ float *main( float t_old, float r, float x1_old,float  x2_old, float y1_old,floa
   y2_prime_av=(1/6)*(y1_prime_1+(2*y1_prime_2)+(2*y1_prime_3)+y1_prime_4);
   y2_prime_av=(1/6)*(y2_prime_1+(2*y2_prime_2)+(2*y2_prime_3)+y2_prime_4);
 
+  //new values 
+
+  float x1_new,x2_new, y1_new,y2_new;
+
+  x1_new=x1_old+(x1_prime_av*h);
+  x2_new=x2_old+(x2_prime_av*h);
+  y1_new=y1_old+(y1_prime_av*h);
+  y2_new=y2_old+(y2_prime_av*h);
+
   //array of values to return 
  
   float *ans;
   ans=malloc(5*sizeof(float));
   
-  ans[0]=t_mid2;
-  ans[1]=x1_prime_av;
-  ans[2]=x2_prime_av;
-  ans[3]=y1_prime_av; 
-  ans[4]=y2_prime_av;
-
   //fill the array of values to return
+
+  ans[0]=t_mid2;
+  ans[1]=x1_new;
+  ans[2]=x2_new;
+  ans[3]=y1_new; 
+  ans[4]=y2_new;
 
   return ans;
 }
