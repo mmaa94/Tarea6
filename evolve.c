@@ -47,6 +47,15 @@ float main(int argc, char **dots){
   //Entero para recorrer un ciclo
   int i;
 
+  //Intervalo entre cada punto de tiempo
+  float h=5000;
+  
+  //Número de puntos de tiempo
+
+  float time=5*pow(10,9);
+  int n_points=int((time+h)/h);
+
+
   //Arreglo para el tiempo
 
   float *t;
