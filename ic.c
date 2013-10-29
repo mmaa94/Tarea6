@@ -89,8 +89,8 @@ float main(int argc, char **argv){
       v_t = sqrt((G*M)/(2*r));
       vix[i] = -v_t*sin((i-12)*theta2) + v0x_c;
       viy[i] = v_t*cos((i-12)*theta2) + v0y_c;
-      xi[i] = r*cos((i-12)*theta2) + x0_c;
-      yi[i] = r*sin((i-12)*theta2) + y0_c;
+      xi[i] = 2*r*cos((i-12)*theta2) + x0_c;
+      yi[i] = 2*r*sin((i-12)*theta2) + y0_c;
 
     }
 
@@ -99,8 +99,8 @@ float main(int argc, char **argv){
       v_t = sqrt((G*M)/(3*r));
       vix[i] = -v_t*sin((i-30)*theta3) + v0x_c;
       viy[i] = v_t*cos((i-30)*theta3) + v0y_c;
-      xi[i] = r*cos((i-30)*theta3) + x0_c;
-      yi[i] = r*sin((i-30)*theta3) + y0_c;
+      xi[i] = 3*r*cos((i-30)*theta3) + x0_c;
+      yi[i] = 3*r*sin((i-30)*theta3) + y0_c;
 
     }
 
@@ -109,8 +109,8 @@ float main(int argc, char **argv){
       v_t = sqrt((G*M)/(4*r));
       vix[i] = -v_t*sin((i-54)*theta4) + v0x_c;
       viy[i] = v_t*cos((i-54)*theta4) + v0y_c;
-      xi[i] = r*cos((i-54)*theta4) + x0_c;
-      yi[i] = r*sin((i-54)*theta4) + y0_c;
+      xi[i] = 4*r*cos((i-54)*theta4) + x0_c;
+      yi[i] = 4*r*sin((i-54)*theta4) + y0_c;
 
     }
 
@@ -119,8 +119,8 @@ float main(int argc, char **argv){
       v_t = sqrt((G*M)/(5*r));
       vix[i] = -v_t*sin((i-84)*theta5) + v0x_c;
       viy[i] = v_t*cos((i-84)*theta5) + v0y_c;
-      xi[i] = r*cos((i-84)*theta5) + x0_c;
-      yi[i] = r*sin((i-84)*theta5) + y0_c;
+      xi[i] = 5*r*cos((i-84)*theta5) + x0_c;
+      yi[i] = 5*r*sin((i-84)*theta5) + y0_c;
 
     }
     
