@@ -29,7 +29,7 @@ float main(int argc, char **argv){
   int r = 10;
   int v_t = 0;
   
-  //Espacio entre estrellas para cada orbita (en grados)
+  //Espacio entre estrellas para cada orbita (en radianes)
   
   int theta1 = PI/6;
   int theta2 = PI/9;
@@ -39,23 +39,23 @@ float main(int argc, char **argv){
 
   //Número de posiciones a encontrar
 
-  int n=121;
+  int n = 121;
 
   //Apartando espacio para arreglos de id, posiciones iniciales y velocidades iniciales
 
   float *xi, *yi, *vix, *viy,*id;
 
-  xi=malloc(n*sizeof(float));
-  yi=malloc(n*sizeof(float));
-  vix=malloc(n*sizeof(float));
-  viy=malloc(n*sizeof(float));
-  id=malloc(n*sizeof(int));
+  xi = malloc(n*sizeof(float));
+  yi = malloc(n*sizeof(float));
+  vix = malloc(n*sizeof(float));
+  viy = malloc(n*sizeof(float));
+  id = malloc(n*sizeof(int));
 
   int i;
   
   //Llenando los id 
   
-  for(i = 0; i < 121; i++){
+  for(i = 0; i < n; i++){
 
     id[i] = i-1;
 
@@ -63,13 +63,17 @@ float main(int argc, char **argv){
   
   //Calculando las condiciones iniciales
 
+  //Para el centro de la galaxia
+
   xi[0] = x0_c;
   yi[0] = y0_c;
   vix[0] = v0x_c;
   viy[0] = v0y_c;
   
-  for(i = 1; i < 121; i++){
+  for(i = 1; i < n; i++){
     
+    //Para cada órbita, se calculan las condiciones iniciales, variando el ángulo para cada estrella
+
     if(i < 13){
    
       v_t = sqrt(G*M/r);
@@ -119,14 +123,20 @@ float main(int argc, char **argv){
       yi[i] = r*sin((i-84)*theta5) + y0_c;
 
     }
-
+    
   } 
+
+  //Creando un archivo de texto con las condiciones iniciales calculadas
 
   FILE *output;
   output = fopen("condiciones_iniciales.txt","w");
   
-  for(i=0;i<121;i++){
-    fprintf(output, "%f %f %f %f\n", id[i], xi[i], yi[i], vix[i], viy[i]);
+  for(i = 0; i < n; i++){
+
+    //El archivo imprime 5 columnas con 121 filas, correspondiendo a los datos del centro y las 120 estrellas de la galaxia
+
+    fprintf(output, "%f %f %f %f %f\n", id[i], xi[i], yi[i], vix[i], viy[i]);
+
   }
   
   fclose(output);

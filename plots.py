@@ -7,6 +7,8 @@ Autores: Nathalie Agudelo Dueñas y  María M. Ariza Acero
 Fecha de creación: Oct/24/2013
 """
 
+#En este recorrido se extraen los datos de evolución de la galaxia cada 5000 millones de años
+
 for i in range(5):
 
 #Leyendo información de los archivos generados en evolve.c
@@ -15,11 +17,12 @@ for i in range(5):
     x = data_ev[:,1]
     y = data_ev[:,2]
 
-#Graficando las posiciones de las estrellas en un tiempo t    
+#Graficando las posiciones de las estrellas en un tiempo t
+#Guardando gráficas en archivos .jpg    
     
-pylab.plot(x,y)
+    pylab.plot(x,y)
     pylab.savefig('evolution(i)'+'.jpg')
-    pylab.title('Evolución de la galaxia en x años')
+    pylab.title('Evolución de la galaxia en 5000 millones de años')
     pylab.xlabel('x(t)')
     pylab.ylabel('y(t)')
     pylab.close()
