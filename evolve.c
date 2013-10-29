@@ -5,7 +5,7 @@
 //#include "sec_order.h"
 
 /**
-Módulo que contiene la función main para analizar los datos de un archivo de puntos y hacer lasolución usando Runge Kutta de cuarto orden.
+Módulo que con[iene la función main para analizar los datos de un archivo de puntos y hacer la solución usando Runge Kutta de cuarto orden.
 Autores:Nathalie Agudelo Dueñas y  María M. Ariza Acero 
 Fecha de creación: Oct  24 02:53:49 COT 2013
 **/
@@ -15,56 +15,63 @@ float main(int argc, char **dots){
   //Comprobar el número de parámetros
 
   if(argc!=2){
-	      printf("Los parámetros de entrada no son los requeridos");
+	      printf("Se requieren 2 parámetros de entrada");
 	      exit(1);
 	    }
 
-  //Archivo 
+  //Archivo a leer
+
   FILE *dot;
-  dot=fopen(dots[1],"r");
+  dot = fopen(dots[1],"r");
 
   if(!(dot=fopen(dots[1],"r"))){
-	      printf("Problema abriendoel archivo %s\n",dots[1]);
-	      exit(1);
-	    }
+    printf("Problema abriendoel archivo %s\n",dots[1]);
+    exit(1);
+  }
 
   //Número de objetos a analizar
-  int n_stars=count_lines(dot);
+  
+  int n_stars = count_lines(dot);
   
   //Número de galaxias
-  int n_galaxias=n_stars/121;
+  
+  int n_galaxias = n_stars/121;
 
   //Arreglos que guardan las coordenadas los ID, posiciones y velocidades inciales en el archivo de entrada
+  
   float *id, *x0, *y0, *v0x, *v0y;
 
   //Separación de espacio para guardar los datos de las condiciones inciales  
-  id=malloc(n_stars*sizeof(float));
-  x0=malloc(n_stars*sizeof(float));
-  y0=malloc(n_stars*sizeof(float));
-  v0x=malloc(n_stars*sizeof(float));
-  v0y=malloc(n_stars*sizeof(float));
+  
+  id = malloc(n_stars*sizeof(float));
+  x0 = malloc(n_stars*sizeof(float));
+  y0 = malloc(n_stars*sizeof(float));
+  v0x = malloc(n_stars*sizeof(float));
+  v0y = malloc(n_stars*sizeof(float));
 
   //Entero para recorrer un ciclo
 
   int i;
 
-  //Ciclo para guardar los datos en los arreglos anteriores
-
-  for(i=0;i<n_points;i++){
-
-    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],,&v0x[i],&v0y[i]);
-  }
-  fclose(dot);
 
    //Intervalo entre cada punto de tiempo en Byr
-  float h=pow(10,-6);
+  
+  float h = pow(10,-6);
   
   //Número de puntos de tiempo
 
-  float time=5*pow(10,9);
-  int n_points=int((time+h)/h);
+  float time = 5*pow(10,9);
+  int n_points = ((time + h)/h);
 
-  //Arreglos para de los resultados obtenidos para X, Y, Vx, Vy para los tiempos t=1, 2, 3,4, 5 (t está en Byr)
+  //Ciclo para guardar los datos en los arreglos anteriores
+
+  for(i=0; i < n_points; i++){
+
+    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],&v0x[i],&v0y[i]);
+  }
+  fclose(dot);
+
+  //Arreglos para de los resultados obtenidos para x, y, V_x, V_y para los tiempos t = 1, 2, 3, 4, 5 (t está en Byr)
 
   float *t1_X,*t2_X,*t3_X,*t4_X,*t5_X;
   float *t1_y,*t2_y,*t3_y,*t4_y,*t5_y;
@@ -101,60 +108,80 @@ float main(int argc, char **dots){
   t5_Vx=malloc(n_stars*sizeof(float));
   t5_Vy=malloc(n_stars*sizeof(float));
 
-  //Análisis para cada estrella de una sóla galaxia 
+  //Análisis para cada estrella de una sola galaxia 
 
-  if(n_galaxias==1){
+  if(n_galaxias == 1){
     
     //Ciclo para recorrer cada estrella
 
-    for(i=-1;i<120;i++){
+    for(i = -1; i < 120; i++){
 
-      if(i==-1){
+      if(i == -1){
 	/**Procedimiento para el centro de la galaxia**/
       }
 
       else{
+
 	//Distancia de la órbita de la estrella al CM en kpc
+
 	float r;
       
 	//Órbita interna
-	if(i<=11){
+	
+	if(i <= 11){
+
 	  r=10;
-	}
-	//Segunda órbita
-	if(i>=12 && i<=29){
-	  r=20;
-	}
-	//Tercera órbita
-	if(i>=30 && i<=53){
-	  r=30;
-	}
-	//Cuarta órbita
-	if(i>=54 && i<=83){
-	  r=40;
-	}
-	//Órbita exterior
-	if(i>=84 && i<=119){
-	  r=50;
+
 	}
 
-	//Arreglos para guardar las posiciones y velocidades de la i-ésima estrella durante los 5000' de años
+	//Segunda órbita
+	
+	if(i >= 12 && i <= 29){
+
+	  r=20;
+
+	}
+	//Tercer órbita
+
+	if(i >= 30 && i <= 53){
+
+	  r=30;
+
+	}
+
+	//Cuarta órbita
+
+	if(i >= 54 && i <= 83){
+	 
+	  r=40;
+	
+	}
+	
+	//Órbita exterior
+	
+	if(i>=84 && i<=119){
+	  
+	  r=50;
+
+	}
+
+	//Arreglos para guardar las posiciones y velocidades de la i-ésima estrella durante los 5000 millones de años
 
 	float *Xi;
-	Xi=malloc(n_points*sizeof(float));
+	Xi = malloc(n_points*sizeof(float));
 
 	float *Yi;
-	Yi=malloc(n_points*sizeof(float));
+	Yi = malloc(n_points*sizeof(float));
 
 	float *Vxi;
-	Vxi=malloc(n_points*sizeof(float));
+	Vxi = malloc(n_points*sizeof(float));
 
 	float *Vyi;
-	Vyi=malloc(n_points*sizeof(float));
+	Vyi = malloc(n_points*sizeof(float));
 
 	//Arreglo para el tiempo
 	float *t;
-	t=malloc(n_points*sizeof(float));
+	t = malloc(n_points*sizeof(float));
 
 	//Condiciones iniciales 
 
@@ -272,7 +299,7 @@ float main(int argc, char **dots){
     FILE *in5;
     char filename5[25]="t5_output.dat";
     
-    in5 = fopen(t5_output,"w");
+    in5 = fopen(filename5,"w");
 
     if(!in5){
     printf("problems opening the file %s\n", filename5);
