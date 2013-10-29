@@ -10,7 +10,7 @@ Fecha de creación: Oct 22  21:43:35 COT 2013
 
 //Constante de gravitación universal en kpc*km²
 
-#define G 4.80475E-6 
+#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Byr^-2*Mo^-1, donde Byr son billones de años
 
 //Masa del CM de la galaxia
 #define M pow(10,12)
