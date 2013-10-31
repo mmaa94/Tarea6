@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Byr^-2*Mo^-1, donde Byr son billones de años
+#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Gyr^-2*Mo^-1, donde Byr son billones de años
 #define PI 3.14159
 
 /*
@@ -24,18 +24,18 @@ float main(int argc, char **argv){
   float y0_c = atof(argv[2]);
   float v0x_c = atof(argv[3]);
   float v0y_c = atof(argv[4]);
-  float M = pow(10,12);
-  int R = 50;
-  int r = 10;
-  int v_t = 0;
+  float M = 1.0E12;
+  float R = 50.0;
+  float r = 10.0;
+  float v_t = 0.0;
   
   //Espacio entre estrellas para cada orbita (en radianes)
   
-  int theta1 = PI/6;
-  int theta2 = PI/9;
-  int theta3 = PI/12;
-  int theta4 = PI/15;
-  int theta5 = PI/18;
+  float theta1 = PI/6;
+  float theta2 = PI/9;
+  float theta3 = PI/12;
+  float theta4 = PI/15;
+  float theta5 = PI/18;
 
   //Número de posiciones a encontrar
 
