@@ -37,7 +37,7 @@ float main(int argc, char **argv){
   float theta4 = PI/15;
   float theta5 = PI/18;
 
-  //Número de posiciones a encontrar
+  //Número de posiciones a encontrar (Recorrer el ciclo)
 
   int n = 121;
 
