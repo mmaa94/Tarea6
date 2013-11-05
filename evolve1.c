@@ -74,6 +74,19 @@ float main(int argc, char **dots){
   }
   fclose(dot);
 
+  //Arreglo con la distancia de cada estrella a cada galaxia y de cada galaxia a las otras galaxias
+
+  float *r_stars,*r_galaxy;
+  
+  float size_r_stars;
+  size_r_stars=n_galaxy*n_stars;
+
+  float size_r_galaxy;
+  size_r_galaxy=(n_galaxy-1)*n_stars;
+
+  r_stars=malloc(size_r_stars*sizeof(float));
+  r_galaxy=malloc(size_r_galaxy*sizeof(float));
+
   //Arreglos para de los resultados obtenidos para x, y, V_x, V_y para los tiempos t = 1, 2, 3, 4, 5 (t está en Byr)
 
   float *t1_X,*t2_X,*t3_X,*t4_X,*t5_X;
@@ -111,6 +124,15 @@ float main(int argc, char **dots){
   t5_Vx=malloc(n_stellar*sizeof(float));
   t5_Vy=malloc(n_stellar*sizeof(float));
 
+  for (i=0;i<n_stellar;i++){
+
+    if(id[i]==-1){
+
+    }
+
+    else{
+
+    }
   
 
 	//Arreglos para guardar las posiciones y velocidades de la i-ésima estrella durante los 5000 millones de años

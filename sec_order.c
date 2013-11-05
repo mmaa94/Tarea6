@@ -15,6 +15,8 @@ Fecha de creación: Oct 22  21:43:35 COT 2013
 //Masa del CM de la galaxia
 #define M pow(10,12)
 
+
+
 //Primera derivada (para cualquier ordenada (x,y))
 float first_derv(float t,float r, float z1, float z2){
 
@@ -35,7 +37,7 @@ float second_derv(float t,float r, float z1, float z2){
 }
 
 //Aproximación: Método Runge Kutta de 4to orden para cada coordenada
-float *main( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
+float *runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
 
   /**
    Calcula el valor de la derivada en el punto usando la aproximación del método de Runge Kutta de 4to orden.
