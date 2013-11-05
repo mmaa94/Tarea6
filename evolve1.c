@@ -111,62 +111,7 @@ float main(int argc, char **dots){
   t5_Vx=malloc(n_stellar*sizeof(float));
   t5_Vy=malloc(n_stellar*sizeof(float));
 
-  //Análisis para cada estrella de una sola galaxia 
-
-  if(n_galaxias == 1){
-    
-    //Ciclo para recorrer cada estrella
-
-    for(i = -1; i < 120; i++){
-
-      if(i == -1){
-	/**Procedimiento para el centro de la galaxia**/
-      }
-
-      else{
-
-	//Distancia de la órbita de la estrella al CM en kpc
-
-	float r;
-      
-	//Órbita interna
-	
-	if(i <= 11){
-
-	  r=10;
-
-	}
-
-	//Segunda órbita
-	
-	if(i >= 12 && i <= 29){
-
-	  r=20;
-
-	}
-	//Tercer órbita
-
-	if(i >= 30 && i <= 53){
-
-	  r=30;
-
-	}
-
-	//Cuarta órbita
-
-	if(i >= 54 && i <= 83){
-	 
-	  r=40;
-	
-	}
-	
-	//Órbita exterior
-	
-	if(i>=84 && i<=119){
-	  
-	  r=50;
-
-	}
+  
 
 	//Arreglos para guardar las posiciones y velocidades de la i-ésima estrella durante los 5000 millones de años
 
@@ -198,32 +143,8 @@ float main(int argc, char **dots){
 
 	int j;
 
-	for(j=1;j=n_points;j++){
-
-	  //float *rg_4j=main(t[j-1],r,Xi[j-1],Vxi[j-1],Yi[j-1],Vyi[j-1],h);//Main del módulo Runge Kutta 4to orden(sec_order.c)
-	  //rg_4j[0]=t[j];
-	  //rg_4j[1]=Xi[j];
-	  //rg_4j[2]=Vxi[j];
-	  //rg_4j[3]=Yi[j];
-	  //rg_4j[4]=Vyi[j];
-
-	  /**Organizar los datos para t=1
-	     if (rg_4j[0]==(1*pow(10,9))){
-
-	     int k;
-	     for(k=0;k<(5*n_stars);
-	     }
-	  **/
-	}
-
-	//free(*t);
-	//free(*Xi);
-	//free(*Yi);
-	//free(*Vxi);
-	//free(*Vxi);
-      }
-    }
-  } 
+	
+  
   
   //Escritura del primer archivo
 
