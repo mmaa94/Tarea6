@@ -41,7 +41,7 @@ float main(int argc, char **dots){
 
   //Número de estrellas
 
-  int n_stars=n_stellar - n_galaxy;
+  int n_stars = n_stellar - n_galaxy;
 
   //Arreglos que guardan las coordenadas los ID, posiciones y velocidades inciales en el archivo de entrada
   
@@ -59,7 +59,7 @@ float main(int argc, char **dots){
 
   int i;
 
-  //Intervalo entre cada punto de tiempo en Byr
+  //Intervalo entre cada punto de tiempo en Gyr
   
   float h = pow(10,-5);
   
@@ -76,7 +76,7 @@ float main(int argc, char **dots){
   }
   fclose(dot);
 
-  //Arreglos para de los resultados obtenidos para x, y, V_x, V_y para los tiempos t = 1, 2, 3, 4, 5 (t está en Gyr)
+  //Arreglos de los resultados obtenidos para x, y, V_x, V_y para los tiempos t = 1, 2, 3, 4, 5 (t está en Gyr)
 
   float *t1_X,*t2_X,*t3_X,*t4_X,*t5_X;
   float *t1_y,*t2_y,*t3_y,*t4_y,*t5_y;
@@ -304,14 +304,14 @@ float *runge_kutta4(float t_old, float r1, float r2, float x1_old1, float x1_old
   //Para estos nuevos puntos, se calcula la derivada
 
   x1_prime_2 = first_derv(x2_old);
-  x2_prime_2 = second_derv(r1,r2,x1_old1, x1_old2);
+  x2_prime_2 = second_derv(r,x1_old1, x1_old2);
 
   y1_prime_2 = first_derv(y2_old);
-  y2_prime_2 = second_derv(r1,r2,y1_old1, y1_old2);
+  y2_prime_2 = second_derv(r,y1_old1, y1_old2);
 
-  //from this estimation move to the middle point: middle time, middle x position and middle y position
+  //De esta estimación nos vamos al punto medio: tiempo medio, posición en x y y medias
 
-  t_mid2 = t_old + (h/2.0);
+  t_mid = t_old + (h/2.0);
 
   x1_mid1 = x1_old + (h/2.0) * x1_prime_2;
   x2_mid1 = x2_old + (h/2.0) * x2_prime_2;
@@ -322,10 +322,10 @@ float *runge_kutta4(float t_old, float r1, float r2, float x1_old1, float x1_old
   //Con estos nuevos puntos calculamos las derivadas 
 
   x1_prime_3 = first_derv(x2_mid1);
-  x2_prime_3 = second_derv(r1,r2,x1_mid1, x2_mid1);
+  x2_prime_3 = second_derv(r,x1_mid1, x2_mid1);
 
-  y1_prime_3 = first_derv(t_mid1,r,y1_mid1, y2_mid1);
-  y2_prime_3 = second_derv(t_mid1,r,y1_mid1, y2_mid1);
+  y1_prime_3 = first_derv(y2_mid1);
+  y2_prime_3 = second_derv(r,y1_mid1, y2_mid1);
 
   //Con esta estimación vamos al siguiente punto
 
