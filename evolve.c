@@ -5,7 +5,7 @@
 #include "sec_order.h"
 
 /**
-Módulo que con[iene la función main para analizar los datos de un archivo de puntos y hacer la solución usando Runge Kutta de cuarto orden.
+Módulo que contiene la función main para analizar los datos de un archivo de puntos y hacer la solución usando Runge Kutta de cuarto orden.
 Autores:Nathalie Agudelo Dueñas y  María M. Ariza Acero 
 Fecha de creación: Oct  24 02:53:49 COT 2013
 **/

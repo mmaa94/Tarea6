@@ -10,15 +10,16 @@ Fecha de creación: Oct 22  21:43:35 COT 2013
 
 //Constante de gravitación universal en kpc*km²
 
-#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Byr^-2*Mo^-1, donde Byr son billones de años
+#define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Gyr^-2*Mo^-1, donde Gyr son billones de años
 
-//Masa del CM de la galaxia
-#define M pow(10,12)
+//Masa del centro  de la galaxia
 
+#define M 1.0E12
 
 
 //Primera derivada (para cualquier ordenada (x,y))
-float first_derv(float t,float r, float z1, float z2){
+
+float first_derv(float z2){
 
   /**
    Retorna la primera derivada de la coordenada que entra 
@@ -26,33 +27,53 @@ float first_derv(float t,float r, float z1, float z2){
   return z2;
 }
 
-//Segunda derivada (para cualquier ordenada (x,y)) 
-float second_derv(float t,float r, float z1, float z2){
+int boolean = 0;
 
-   /**
+//Segunda derivada (para cualquier ordenada (x,y)) 
+float second_derv(float r1, float r2, float z1_1,float z1_2 ){
+  /**
    Retorna la segunda derivada de la coordenada que entra 
   **/
-  return (G*M*(z1))/(pow(r,3));
+  
+  float interaction;
+
+  if (r1==0 || r2==0){
+
+    boolean = 1;
+    interaction = (G*M*(z1_1))/(pow(r1,3)+(G*M*(z1_2));
+
+  }
+
+  else{
+  
+    interaction = (G*M*(z1_1))/(pow(r1,3)+(G*M*(z1_2))/(pow(r2,3);
+  }
+ 
+  return interaction;
 
 }
 
 //Aproximación: Método Runge Kutta de 4to orden para cada coordenada
-float *runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_old,float y2_old, float h){
+
+float *runge_kutta4(float t_old, float r1, float r2, float x1_old1, float x1_old2, float  x2_old, float y1_old1,float y1_old2, float y2_old, float h){
 
   /**
    Calcula el valor de la derivada en el punto usando la aproximación del método de Runge Kutta de 4to orden.
    Input: 
    -t_old: valor previo del tiempo
-   -r: valor de la distancia entre la estrella y el centro de masa
-   -x1_old: valor previo de x
-   -x2_old: valor previo de la primera derivada de x
-   -y1_old: valor previo de y
-   -y2_old: valor previo de la primera derivada de y
-   -h: espacio en tre cada tiempo
+   -r1: valor de la distancia entre la estrella y el centro de la galaxia 1
+   -r2: valor de la distancia entre la estrella y el centro de la galaxia 2
+   -x1_old1: valor previo de x con respecto a la galaxia 1; o sea la posición en x
+   -x1_old2: valor previo de x con respecto a la galaxia 2; o sea la posición en x
+   -y1_old1: valor previo de y con respecto a la galaxia 1; o sea la posición en y
+   -y1_old2: valor previo de y con respecto a la galaxia 2; o sea la posición en y
+   -x2_old: valor previo de la primera derivada de x; o sea, la velocidad en x
+   -y2_old: valor previo de la primera derivada de y; o sea, la velocidad en y
+   -h: espacio entre cada tiempo
    Output:Arreglo con los nuevos valores de tiempo, las coordenadas x y y y sus respectivas derivadas
   **/
 
-  //variable declaration
+  //Declaración de variables
 
   float x1_prime_1, x2_prime_1, y1_prime_1, y2_prime_1, t_mid, x1_mid, x2_mid, y1_mid, y2_mid;
   float x1_prime_2, x2_prime_2, y1_prime_2, y2_prime_2, t_mid1, x1_mid1, x2_mid1, y1_mid1, y2_mid1;
@@ -60,17 +81,17 @@ float *runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_
   float x1_prime_4, x2_prime_4, y1_prime_4, y2_prime_4;
   float x1_prime_av, x2_prime_av, y1_prime_av, y2_prime_av;
   
-  //get the first derivatives of x and y
+  //Se obtienen las primeras derivadas de x y y
 
-  x1_prime_1 = first_derv(t_old,r,x1_old, x2_old);
-  x2_prime_1 = second_derv(t_old,r,x1_old, x2_old);
+  x1_prime_1 = first_derv(x2_old);
+  x2_prime_1 = second_derv(r1,r2,x1_old1, x1_old2);
 
-  y1_prime_1 = first_derv(t_old,r,y1_old, y2_old);
-  y2_prime_1 = second_derv(t_old,r,y1_old, y2_old);
+  y1_prime_1 = first_derv(y2_old);
+  y2_prime_1 = second_derv(r1,r2,y1_old1, y1_old2);
   
-  //from this estimation move to the middle point: middle time, middle x position and middle y position
+  //De esta estimación, vamos al punto medio: tiempo medio, posición en x y y medias
 
-  t_mid = t_old+ (h/2.0);
+  t_mid = t_old + (h/2.0);
 
   x1_mid = x1_old + (h/2.0) * x1_prime_1;
   x2_mid = x2_old + (h/2.0) * x2_prime_1;
@@ -78,17 +99,17 @@ float *runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_
   y1_mid = y1_old + (h/2.0) * y1_prime_1;
   y2_mid = y2_old + (h/2.0) * y2_prime_1;
 
-  //from this new points calculate primes
+  //Para estos nuevos puntos, se calcula la derivada
 
-  x1_prime_2 = first_derv(t_mid,r,x1_old, x2_old);
-  x2_prime_2 = second_derv(t_mid,r,x1_old, x2_old);
+  x1_prime_2 = first_derv(x2_old);
+  x2_prime_2 = second_derv(r1,r2,x1_old1, x1_old2);
 
-  y1_prime_2 = first_derv(t_mid,r,y1_old, y2_old);
-  y2_prime_2 = second_derv(t_mid,r,y1_old, y2_old);
+  y1_prime_2 = first_derv(y2_old);
+  y2_prime_2 = second_derv(r1,r2,y1_old1, y1_old2);
 
   //from this estimation move to the middle point: middle time, middle x position and middle y position
 
-  t_mid2 = t_old+ (h/2.0);
+  t_mid2 = t_old + (h/2.0);
 
   x1_mid1 = x1_old + (h/2.0) * x1_prime_2;
   x2_mid1 = x2_old + (h/2.0) * x2_prime_2;
@@ -96,15 +117,15 @@ float *runge_kutta4( float t_old, float r, float x1_old,float  x2_old, float y1_
   y1_mid1 = y1_old + (h/2.0) * y1_prime_2;
   y2_mid1 = y2_old + (h/2.0) * y2_prime_2;
 
-  //from this new points calculate primes 
+  //Con estos nuevos puntos calculamos las derivadas 
 
-  x1_prime_3 = first_derv(t_mid1,r,x1_mid1, x2_mid1);
-  x2_prime_3 = second_derv(t_mid1,r,x1_mid1, x2_mid1);
+  x1_prime_3 = first_derv(x2_mid1);
+  x2_prime_3 = second_derv(r1,r2,x1_mid1, x2_mid1);
 
   y1_prime_3 = first_derv(t_mid1,r,y1_mid1, y2_mid1);
   y2_prime_3 = second_derv(t_mid1,r,y1_mid1, y2_mid1);
 
-  //from this estimation move to the next point
+  //Con esta estimación vamos al siguiente punto
 
   t_mid2 = t_old+ h;
 
