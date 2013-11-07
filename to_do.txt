@@ -1,4 +1,5 @@
 Corregir la posición para el archivo que imprime
 Las correcciones para la constante 
 los valores deben arrojarse en km/s
--
+Cómo esribir los datos en el archivo los datos para las galaxias 
+
