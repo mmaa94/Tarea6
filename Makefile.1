@@ -3,17 +3,18 @@ all: plots
 plots:  evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt
 	python plots.py 
 
-evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt: evolution.out
+evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt: concatenate.txt evolution.out
 	./evolution.out concatenate.txt
 
 evolution.out: evolve2.c
-	cc evolve2.c -lm
+	cc evolve2.c -lm -o evolution.out
 
-concatenate: condiciones_inicales1.txt condiciones_inicales2.txt
+concatenate.txt: condiciones_inicales1.txt condiciones_inicales2.txt
 	cat condiciones_inicales1.txt condiciones_inicales2.txt  > concatenate.txt
 
 condiciones_inicales1.txt: a.out
 	./a.out 0 0 0 0	
+	mv condiciones_iniciales.txt condiciones_inicales1.txt
 
 condiciones_inicales2.txt: a.out
 	./a.out 150 200 0 -100
@@ -21,3 +22,5 @@ condiciones_inicales2.txt: a.out
 a.out: ic.c
 	cc ic.c -lm 
 
+clean:
+	rm -f *.o evolution*.txt
