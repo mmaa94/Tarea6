@@ -534,7 +534,73 @@ float main(int argc, char **dots){
 	Yi_2[j] = Ky_2;
 	Vxi_2[j] = Lx_2;
 	Vyi_2[j] = Ly_2;
+
+     }
+	
+	if(i==1){
+
+	  out=fopen("evolution1.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_1[(n_points/5)-1],Yi_1[(n_points/5)-1],Vxi_1[(n_points/5)-1],Vyi_1[(n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution2.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_1[(2*n_points/5)-1],Yi_1[(2*n_points/5)-1],Vxi_1[(2*n_points/5)-1],Vyi_1[(2*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution3.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_1[(3*n_points/5)-1],Yi_1[(3*n_points/5)-1],Vxi_1[(3*n_points/5)-1],Vyi_1[(3*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution4.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_1[(4*n_points/5)-1],Yi_1[(4*n_points/5)-1],Vxi_1[(4*n_points/5)-1],Vyi_1[(4*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution5.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_1[(n_points)-1],Yi_1[(n_points)-1],Vxi_1[(n_points)-1],Vyi_1[(n_points)-1]);
+      
+	  fclose(out);
+	}
+
+	if(i==123){
 	  
+	  out=fopen("evolution1.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_2[(n_points/5)-1],Yi_2[(n_points/5)-1],Vxi_2[(n_points/5)-1],Vyi_2[(n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution2.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_2[(2*n_points/5)-1],Yi_2[(2*n_points/5)-1],Vxi_2[(2*n_points/5)-1],Vyi_2[(2*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution3.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_2[(3*n_points/5)-1],Yi_2[(3*n_points/5)-1],Vxi_2[(3*n_points/5)-1],Vyi_2[(3*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution4.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_2[(4*n_points/5)-1],Yi_2[(4*n_points/5)-1],Vxi_2[(4*n_points/5)-1],Vyi_2[(4*n_points/5)-1]);
+      
+	  fclose(out);
+
+	  out=fopen("evolution5.txt","a");
+            
+	  fprintf(out,"%d %f %f %f %f \n",i-1,Xi_2[(n_points)-1],Yi_2[(n_points)-1],Vxi_2[(n_points)-1],Vyi_2[(n_points)-1]);
+      
+	  fclose(out);
 	  
 	}
              
