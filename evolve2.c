@@ -32,50 +32,45 @@ int count_lines(char *filename){
    Output: Número de líneas
   **/
 
-        FILE *in;
-	int n_lineas;
-	int c;
-	if (!(in=fopen(filename,"r"))){
-		printf("El archivo %s no se puede abrir\n",  filename);
-		exit (1);
-	}
-	
-	n_lineas=0;
-	
-	do{
-		c=fgetc(in);
-		if(c=='\n'){
-			n_lineas ++;
-		}
-	}while(c!=EOF);
-
-	fclose(in);
-	return n_lineas;
+  FILE *in;
+  int n_lineas;
+  int c;
+  if (!(in=fopen(filename,"r"))){
+    printf("El archivo %s no se puede abrir\n",  filename);
+    exit (1);
+  }
+  
+  n_lineas=0;
+  
+  do{
+    c=fgetc(in);
+    if(c=='\n'){
+      n_lineas ++;
+    }
+  }while(c!=EOF);
+  //printf("%d", n_lineas);
+  fclose(in);
+  return n_lineas;
 }
 
 float main(int argc, char **dots){
 
   //Comprobar el número de parámetros
 
-  if(argc!=2){
-    printf("Se requieren 2 parámetros de entrada");
-    exit(1);
-  }
-
   //Archivo a leer
-
+  
   FILE *dot;
   dot = fopen(dots[1],"r");
 
   if(!(dot=fopen(dots[1],"r"))){
-    printf("Problema abriendoel archivo %s\n",dots[1]);
+    printf("Problema abriendo el archivo %s\n",dots[1]);
     exit(1);
   }
 
   //Número de objetos a analizar
   
   int n_stellar = count_lines(dots[1]);
-  
+ 
   //Número de galaxias
   
   int n_galaxy = n_stellar/121;
@@ -84,6 +79,7 @@ float main(int argc, char **dots){
 
   int n_stars = n_stellar - n_galaxy;
 
+  
   //Arreglos que guardan las coordenadas los ID, posiciones, velocidades inciales en el archivo de entrada  y los tiempos de evolución 
   
   float *id, *x0, *y0, *v0x, *v0y, *t;
@@ -114,12 +110,10 @@ float main(int argc, char **dots){
   for(i=0; i < n_stellar; i++){
 
     fscanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],&v0x[i],&v0y[i]);
-    
-    // printf("%f %f %f %f %f \n",id[i],x0[i],y0[i],v0x[i],v0y[i]);
+
   }
   fclose(dot);
-
-  
+   
   //Análisis para cada estrella de una sola galaxia 
 
   if (n_galaxy==1){
@@ -154,7 +148,7 @@ float main(int argc, char **dots){
 	  Xi[j]=Xi[j-1]+(h*Vxi[0]);
 	  Vyi[j]=Vyi[0];
 	  Yi[j]=Yi[j-1]+(h*Vyi[0]);
-	  printf("%f %f %f %f\n",Xi[j], Yi[j], Vxi[j], Vyi[j]);
+	  //printf("%f %f %f %f\n",Xi[j], Yi[j], Vxi[j], Vyi[j]);
 	}
       }
       
