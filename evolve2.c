@@ -235,10 +235,10 @@ float main(int argc, char **dots){
 	Ly = (L4y + 2*L3y + 2*L2y + L1y)/6;
 
 	t[j] = T;
-	Xi[j] = Kx;
-	Yi[j] = Ky;
-	Vxi[j] = Lx;
-	Vyi[j] = Ly;
+	Xi[j] = Kx*h;
+	Yi[j] = Ky*h;
+	Vxi[j] = Lx*h;
+	Vyi[j] = Ly*h;
 	}
       }
       
@@ -268,7 +268,7 @@ float main(int argc, char **dots){
       
       out=fopen("evolution5.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[n_points-1],Yi[n_points-1],Vxi[n_points-1],Vyi[n_points-1]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[(n_points-1],Yi[n_points-1],Vxi[n_points-1],Vyi[n_points-1]);
       
       fclose(out);
       
