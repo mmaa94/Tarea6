@@ -325,19 +325,19 @@ float main(int argc, char **dots){
      Xi_2 = malloc(n_points*sizeof(float));
      Yi_2 = malloc(n_points*sizeof(float));
      Vxi_2 = malloc(n_points*sizeof(float));
-     Vyi_2 = malloc(n_points*sizeof(float);
+     Vyi_2 = malloc(n_points*sizeof(float));
 
      //Inicialización 
 
      Xi_1[0]=x0[0];
      Yi_1[0]=y0[0];
-     Vxi_1[0]=V0x[0];
-     Vyi_1[0]=V0y[0];
+     Vxi_1[0]=v0x[0];
+     Vyi_1[0]=v0y[0];
 
      Xi_2[0]=x0[122];
      Yi_2[0]=y0[122];
-     Vxi_2[0]=V0x[122];
-     Vyi_2[0]=V0y[122];
+     Vxi_2[0]=v0x[122];
+     Vyi_2[0]=v0y[122];
 
      for(j=1;j<n_points;j++){
 	  
@@ -537,7 +537,6 @@ float main(int argc, char **dots){
 	  
 	  
 	}
-      }
              
       out=fopen("evolution1.txt","a");
             
@@ -585,7 +584,7 @@ float main(int argc, char **dots){
       free(Vyi_2);
       
     }
-
+  }
   }
   
   //Liberar espacio
