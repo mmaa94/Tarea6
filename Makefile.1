@@ -1,0 +1,23 @@
+all: plots 
+
+plots: interaction.txt
+	python plots.py interaction.txt
+
+interaction.txt: evolution.out
+	./evolution.out concatenate.txt
+
+evolution.out: evolve2.c
+	cc evolve2.c -lm
+
+concatenate: condiciones_inicales1.txt condiciones_inicales2.txt
+	cat condiciones_inicales1.txt condiciones_inicales1.txt  > concatenate.txt
+
+condiciones_inicales1.txt: a.out
+	./a.out 0 0 0 0	
+
+condiciones_inicales2.txt: a.out
+	./a.out 150 200 0 -100
+
+a.out: ic.c
+	cc ic.c -lm 
+
