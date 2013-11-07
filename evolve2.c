@@ -16,7 +16,11 @@ float aceleracion (float C1, float C2, float c1, float c2){
 
   
   float An;
-  An = ((G*M)*(C1-c1)/sqrt(pow((pow((C1-c1),2)+pow((C2-c2),2)),(3))));
+  float Dif_C1;
+  float Dif_C2;
+  Dif_C1=C1-c1;
+  Dif_C2=C2-c2;
+  An = ((G*M)*(Dif_C1)/sqrt(pow((pow(Dif_C1,2)+pow(Dif_C2,2)),3)));
 
   return An;
 }
@@ -98,11 +102,11 @@ float main(int argc, char **dots){
 
   //Intervalo entre cada punto de tiempo en Gyr
   
-  float h = pow(10,-6);
+  float h = 1.0E-6;
   
   //Número de puntos de tiempo
 
-  float time = 5; /*En miles de millones años*/
+  float time = 5.0; /*En miles de millones años*/
   int n_points = (time + h)/h;
 
    //Ciclo para guardar los datos en los arreglos anteriores
@@ -131,10 +135,12 @@ float main(int argc, char **dots){
       Vyi = malloc(n_points*sizeof(float));
 
       t[0] = 0.0;
-      Xi[0]=x0[i];
-      Yi[0]=y0[i];
-      Vxi[0]=v0x[i];
-      Vyi[0]=v0y[i];
+      Xi[0]=x0[i]+1;
+      Yi[0]=y0[i]+1;
+      Vxi[0]=v0x[i]+1;
+      Vyi[0]=v0y[i]+1;
+
+      //printf("%f %f %f %f\n",Xi[0], Yi[0], Vxi[0], Vyi[0]);}}
 
       int j;
 
@@ -147,9 +153,10 @@ float main(int argc, char **dots){
 	  Xi[j]=Xi[j-1]+(h*Vxi[0]);
 	  Vyi[j]=Vyi[0];
 	  Yi[j]=Yi[j-1]+(h*Vyi[0]);
+	  printf("%f %f %f %f\n",Xi[j], Yi[j], Vxi[j], Vyi[j]);
 	}
       }
-
+      
       //Runge Kutta
       
       for(j=1;j<n_points;j++){
@@ -234,17 +241,20 @@ float main(int argc, char **dots){
 	Lx = (L4x + 2*L3x + 2*L2x + L1x)/6;
 	Ly = (L4y + 2*L3y + 2*L2y + L1y)/6;
 
+
 	t[j] = T;
 	Xi[j] = Kx;
 	Yi[j] = Ky;
 	Vxi[j] = Lx;
 	Vyi[j] = Ly;
 	}
+     
       }
       
       out=fopen("evolution1.txt","a");
             
-      fprintf(out,"%d %f %f %f %f \n",i,Xi[(n_points/5)-1],Yi[(n_points/5)-1],Vxi[(n_points/5)-1],Vyi[(n_points/5)-1]);
+      //      fprintf(out,"%d %f %f %f %f \n",i,Xi[(n_points/5)-1],Yi[(n_points/5)-1],Vxi[(n_points/5)-1],Vyi[(n_points/5)-1]);
+      fprintf(out,"%d %f %f %f %f \n",i,Xi[1],Yi[1],Vxi[1],Vyi[1]);
       
       fclose(out);
       
@@ -277,7 +287,7 @@ float main(int argc, char **dots){
       free(Yi);
       free(Vxi);
       free(Vyi);
-    }
+      }
   }
   
 
@@ -594,7 +604,7 @@ float main(int argc, char **dots){
     free(y0);
     free(v0x);
     free(v0y);
-
+     
   return 0.0;
 }  
 

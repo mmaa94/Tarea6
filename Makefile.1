@@ -3,14 +3,14 @@ all: plots
 plots: interaction.txt
 	python plots.py interaction.txt
 
-interaction.txt: evolution.out
+evolution1.txt evolution2.txt evolution3.txt: evolution.out
 	./evolution.out concatenate.txt
 
 evolution.out: evolve2.c
 	cc evolve2.c -lm
 
 concatenate: condiciones_inicales1.txt condiciones_inicales2.txt
-	cat condiciones_inicales1.txt condiciones_inicales1.txt  > concatenate.txt
+	cat condiciones_inicales1.txt condiciones_inicales2.txt  > concatenate.txt
 
 condiciones_inicales1.txt: a.out
 	./a.out 0 0 0 0	
