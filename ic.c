@@ -22,8 +22,8 @@ float main(int argc, char **argv){
 
   float x0_c = atof(argv[1]);
   float y0_c = atof(argv[2]);
-  float v0x_c = atof(argv[3])*(3.24E-17)/(3.154E16); //Lo pasamos a kpc y a miles de millones de años
-  float v0y_c = atof(argv[4])*(3.24E-17)/(3.154E16);;
+  float v0x_c = atof(argv[3]);
+  float v0y_c = atof(argv[4]);
   float M = 1.0E12;
   float R = 50.0;
   float r = 10.0;
@@ -135,11 +135,11 @@ float main(int argc, char **argv){
 
     //El archivo imprime 5 columnas con 121 filas, correspondiendo a los datos del centro y las 120 estrellas de la galaxia
 
-    fprintf(output, "%f %f %f %f %f\n", id[i], xi[i], yi[i], vix[i]*(3.154E16)/(3.24E-17), viy[i]*(3.154E16)/(3.24E-17));
+    fprintf(output, "%f %f %f %f %f\n", id[i], xi[i], yi[i], vix[i], viy[i]);
 
   }
   
   fclose(output);
-  
+  return 0;
 }
 
