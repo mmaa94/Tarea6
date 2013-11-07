@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "count_lines.h"
 
 /**
 Módulo que contiene la función main para analizar los datos de un archivo de puntos y hacer la solución usando Runge Kutta de cuarto orden.
@@ -12,11 +11,42 @@ Fecha de creación: Nov 5 23:20:49 COT 2013
 #define M 1.0E12
 #define G 4.80475E-6 //Valor de la constante de gravitación universal en kpc^3*Gyr^-2*Mo^-1, donde Gyr son miles de millones de años
 
+
 float aceleracion (float C1, float C2, float c1, float c2){
 
-  float An = ((G*M)(C1-c1)/pow((pow((C1-c1),2)+pow((C2-c2),2))),(3/2));
+  
+  float An;
+  An = ((G*M)*(C1-c1)/sqrt(pow((pow((C1-c1),2)+pow((C2-c2),2)),(3))));
 
   return An;
+}
+
+int count_lines(char *filename){
+
+  /**
+   Input: NOmbre del archivo en el que se quiere contar el número de líneas
+   Output: Número de líneas
+  **/
+
+        FILE *in;
+	int n_lineas;
+	int c;
+	if (!(in=fopen(filename,"r"))){
+		printf("El archivo %s no se puede abrir\n",  filename);
+		exit (1);
+	}
+	
+	n_lineas=0;
+	
+	do{
+		c=fgetc(in);
+		if(c=='\n'){
+			n_lineas ++;
+		}
+	}while(c!=EOF);
+
+	fclose(in);
+	return n_lineas;
 }
 
 float main(int argc, char **dots){
@@ -40,11 +70,11 @@ float main(int argc, char **dots){
 
   //Número de objetos a analizar
   
-  int n_stellar = count_lines(dot);
+  int n_stellar = count_lines(dots[1]);
   
   //Número de galaxias
   
-  int n_galaxy = n_stars/121;
+  int n_galaxy = n_stellar/121;
 
   //Número de estrellas
 
@@ -79,7 +109,7 @@ float main(int argc, char **dots){
 
   for(i=0; i < n_stellar; i++){
 
-    scanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],&v0x[i],&v0y[i]);
+    fscanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],&v0x[i],&v0y[i]);
   }
   fclose(dot);
 
@@ -117,8 +147,9 @@ float main(int argc, char **dots){
 	  Xi[j]=Xi[j-1]+(h*Vxi[0]);
 	  Vyi[j]=Vyi[0];
 	  Yi[j]=Yi[j-1]+(h*Vyi[0]);
-      
-      
+	}
+      }
+
       //Runge Kutta
       
       for(j=1;j<n_points;j++){
@@ -213,31 +244,31 @@ float main(int argc, char **dots){
       
       out=fopen("evolution1.txt","a");
             
-      fprintf(out,"%d %f %f %f %f \n",i,Xi[1000000],Yi[1000000],Vxi[1000000],Vyi[1000000]);
+      fprintf(out,"%d %f %f %f %f \n",i,Xi[(n_points/5)-1],Yi[(n_points/5)-1],Vxi[(n_points/5)-1],Vyi[(n_points/5)-1]);
       
       fclose(out);
       
       out=fopen("evolution2.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[1000000*2],Yi[1000000*2],Vxi[1000000*2],Vyi[1000000*2]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[(2*n_points/5)-1],Yi[(2*n_points/5)-1],Vxi[(2*n_points/5)-1],Vyi[(2*n_points/5)-1]);
       
       fclose(out);
       
       out=fopen("evolution3.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[1000000*3],Yi[1000000*3],Vxi[1000000*3],Vyi[1000000*3]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[(3*n_points/5)-1],Yi[(3*n_points/5)-1],Vxi[(3*n_points/5)-1],Vyi[(3*n_points/5)-1]);
       
       fclose(out);
       
       out=fopen("evolution4.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[1000000*4],Yi[1000000*4],Vxi[1000000*4],Vyi[1000000*4]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[(4*n_points/5)-1],Yi[(4*n_points/5)-1],Vxi[(4*n_points/5)-1],Vyi[(4*n_points/5)-1]);
       
       fclose(out);
       
       out=fopen("evolution5.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[1000000*5],Yi[1000000*5],Vxi[1000000*5],Vyi[1000000*5]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[n_points-1],Yi[n_points-1],Vxi[n_points-1],Vyi[n_points-1]);
       
       fclose(out);
       
@@ -246,8 +277,9 @@ float main(int argc, char **dots){
       free(Yi);
       free(Vxi);
       free(Vyi);
+    }
   }
- 
+  
 
     // if (n_galaxy==2){
 
@@ -261,6 +293,7 @@ float main(int argc, char **dots){
     free(v0x);
     free(v0y);
 
-  return 0;
+  return 0.0;
 }  
+
 
