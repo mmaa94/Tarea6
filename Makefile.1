@@ -1,9 +1,9 @@
 all: plots 
 
-plots: interaction.txt
-	python plots.py interaction.txt
+plots:  evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt
+	python plots.py 
 
-evolution1.txt evolution2.txt evolution3.txt: evolution.out
+evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt: evolution.out
 	./evolution.out concatenate.txt
 
 evolution.out: evolve2.c
