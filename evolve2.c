@@ -114,9 +114,12 @@ float main(int argc, char **dots){
   for(i=0; i < n_stellar; i++){
 
     fscanf(dot,"%f %f %f %f %f \n",&id[i],&x0[i],&y0[i],&v0x[i],&v0y[i]);
+    
+    // printf("%f %f %f %f %f \n",id[i],x0[i],y0[i],v0x[i],v0y[i]);
   }
   fclose(dot);
 
+  
   //Análisis para cada estrella de una sola galaxia 
 
   if (n_galaxy==1){
@@ -135,12 +138,10 @@ float main(int argc, char **dots){
       Vyi = malloc(n_points*sizeof(float));
 
       t[0] = 0.0;
-      Xi[0]=x0[i]+1;
-      Yi[0]=y0[i]+1;
-      Vxi[0]=v0x[i]+1;
-      Vyi[0]=v0y[i]+1;
-
-      //printf("%f %f %f %f\n",Xi[0], Yi[0], Vxi[0], Vyi[0]);}}
+      Xi[0]=x0[i];
+      Yi[0]=y0[i];
+      Vxi[0]=v0x[i];
+      Vyi[0]=v0y[i];
 
       int j;
 
@@ -278,7 +279,7 @@ float main(int argc, char **dots){
       
       out=fopen("evolution5.txt","a");
       
-      fprintf(out,"%d %f %f %f %f\n",i,Xi[(n_points-1],Yi[n_points-1],Vxi[n_points-1],Vyi[n_points-1]);
+      fprintf(out,"%d %f %f %f %f\n",i,Xi[n_points-1],Yi[n_points-1],Vxi[n_points-1],Vyi[n_points-1]);
       
       fclose(out);
       

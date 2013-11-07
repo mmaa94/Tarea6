@@ -9,14 +9,14 @@ evolution1.txt evolution2.txt evolution3.txt evolution4.txt evolution5.txt: conc
 evolution.out: evolve2.c
 	cc evolve2.c -lm -o evolution.out
 
-concatenate.txt: condiciones_inicales1.txt condiciones_inicales2.txt
-	cat condiciones_inicales1.txt condiciones_inicales2.txt  > concatenate.txt
+concatenate.txt: condiciones_iniciales1.txt condiciones_iniciales2.txt
+	cat condiciones_iniciales1.txt condiciones_iniciales2.txt  > concatenate.txt
 
-condiciones_inicales1.txt: a.out
+condiciones_iniciales1.txt: a.out
 	./a.out 0 0 0 0	
-	mv condiciones_iniciales.txt condiciones_inicales1.txt	
+	mv condiciones_iniciales.txt condiciones_iniciales1.txt	
 
-condiciones_inicales2.txt: a.out
+condiciones_iniciales2.txt: a.out
 	./a.out 150 200 0 -100
 
 a.out: ic.c
